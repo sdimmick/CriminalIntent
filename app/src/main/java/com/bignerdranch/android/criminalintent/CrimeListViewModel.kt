@@ -1,16 +1,25 @@
 package com.bignerdranch.android.criminalintent
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+private const val TAG = "CrimeListViewModel"
 
 class CrimeListViewModel : ViewModel() {
-    val crimes = mutableListOf<Crime>()
+    private val crimeRepository = CrimeRepository.get()
+    private val _crimes: MutableStateFlow<List<Crime>> = MutableStateFlow(emptyList())
+    val crimes: StateFlow<List<Crime>>
+        get() = _crimes.asStateFlow()
 
     init {
-        for (i in 0 until 100) {
-            val crime = Crime()
-            crime.title = "Crime #$i"
-            crime.isSolved = i % 2 == 0
-            crimes += crime
+        viewModelScope.launch {
+            crimeRepository.getCrimes().collect {
+                _crimes.value = it
+            }
         }
     }
 }
