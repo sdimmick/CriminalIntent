@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="24dp">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/crime_title"
-        android:text="Crime title" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crime title"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-10dp" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/crime_date"
-        android:text="Crime date" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crime date"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crime_title"
+        tools:layout_editor_absoluteX="-12dp" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/crime_solved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_solved" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
